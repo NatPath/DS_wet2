@@ -1,12 +1,12 @@
 #ifndef _DARRAY_H
 #include <exception>
+#include <stdexcept>
 
 template <class T>
 class DynamicArray{
     T* _data;
     int _size;
     int _counter;
-
     public:
     DynamicArray(int size):_size(size){
         _data=new T[size];
@@ -23,9 +23,11 @@ class DynamicArray{
     //copy c'tor
     DynamicArray(DynamicArray<T>& to_copy){
         _size=to_copy.getSize();
+        T* temp_data;
+        int temp_size;
         try{
-            T* temp_data=new T[_size];
-            int temp_size=to_copy.getSize();
+            temp_data=new T[_size];
+            temp_size=to_copy.getSize();
             for (int i=0;i<temp_size;i++){
                 temp_data[i]=to_copy[i];
             }
@@ -41,10 +43,12 @@ class DynamicArray{
     }
 
     DynamicArray& operator=(DynamicArray<T>& to_assign){
+        T* assign_data;
+        T* temp_data;
         try{
             int new_size = to_assign.getSize();
-            T* assign_data = to_assign.getData();
-            T* temp_data = new T[new_size];
+            assign_data = to_assign.getData();
+            temp_data = new T[new_size];
             
             for(int i = 0; i<new_size;i++){
                 temp_data[i] = assign_data[i]; 
@@ -72,14 +76,15 @@ class DynamicArray{
     }
 
     void expand(){
+        T* new_data;
         try{
-            T* new_data = new T[size * 2];
-            for (int i = 0; i < size; i++)
+            new_data = new T[_size * 2];
+            for (int i = 0; i < _size; i++)
             {
                 new_data[i] = _data[i];
             }
             delete[] _data;
-            size = size*2;
+            _size = _size*2;
             _data = new_data;
         }
         catch(...){
@@ -89,7 +94,6 @@ class DynamicArray{
 
 
     }
-
     //Getters
     int getSize() const{
         return _size;
@@ -113,7 +117,7 @@ class DynamicArray{
         }
     }
 
-    ~DynmaicArray<T>(){
+    ~DynamicArray<T>(){
         delete[] _data;
     }
     void printArray(){
@@ -123,5 +127,4 @@ class DynamicArray{
     }
 
 };
-
 #endif

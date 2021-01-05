@@ -85,12 +85,7 @@ class List{
         return nullptr;
     }
 
-    void addNode(ListNode<T>*  to_add){
-        to_add->connectNext(root);
-        root = to_add;
-    }
-
-
+  
 
     public:
 

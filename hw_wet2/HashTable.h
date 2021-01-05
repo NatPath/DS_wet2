@@ -27,10 +27,11 @@ class HashTable{
                //iterate over a chain
                ListNode<T>* itt= _data_chains[i].getRoot();
                ListNode<T>* next;
-               while(next!=nullptr){
+               while(itt!=nullptr){
                     int key=hash_function(itt->getValue.get);
                     next = itt->getNext();
                     _data_chains[key].add(*itt);
+                    itt = next;
                                       
                }
            }
