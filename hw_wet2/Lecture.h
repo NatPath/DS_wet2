@@ -60,6 +60,7 @@ std::ostream& operator<<(std::ostream& os,const Lecture& lecture){
     os<<"Lecture ID:" <<lecture.courseID<<std::endl;    
     os<<"num_views :" <<lecture.num_views<<std::endl;    
     os<<"~~~~~~~~~~~~~~~~~~~~"<<std::endl;    
+    return os;
 }
 
 #endif

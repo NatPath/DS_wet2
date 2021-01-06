@@ -2,7 +2,6 @@
 #include <exception>
 #include <stdexcept>
 #include "Auxiliaries.h"
-#include "Course.h"
 
 template <class T>
 class DynamicArray{

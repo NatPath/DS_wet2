@@ -17,9 +17,10 @@ class AVL_NODE{
     Node_ptr right;
     Node_ptr parent;
     int height;
+    int rank;
 
     public:
-    AVL_NODE(const KEY& key,const VAL& value):key(key),value(value),left(nullptr),right(nullptr),parent(nullptr),height(0){}
+    AVL_NODE(const KEY& key,const VAL& value):key(key),value(value),left(nullptr),right(nullptr),parent(nullptr),height(0),rank(1){}
     ~AVL_NODE()=default;
    
 
@@ -42,6 +43,9 @@ class AVL_NODE{
     int getHeight() const{
         return height;
     }
+    int getRank() const{
+        return rank;
+    }
     //setters
     void setValue(const VAL& new_value){
         value=new_value;
@@ -60,6 +64,9 @@ class AVL_NODE{
     }
     void setHeight(int new_height){
         height=new_height;
+    }
+    void setRank(int new_rank){
+        rank=new_rank;
     }
 
     //Height functions
@@ -101,6 +108,24 @@ class AVL_NODE{
     //Calculates height and sets new height to be it
     void updateHeight(){
         height=this->calcHeight();
+    }
+    //Rank functions
+    /**
+     * 
+     * */
+    int calcRank(){
+        int left_rank=0;
+        int right_rank=0;
+        if (left!=nullptr){
+            left_rank=left->rank;
+        }
+        if (right!=nullptr){
+            right_rank=right->rank;
+        }
+        return right_rank+left_rank+1;
+    }
+    void updateRank(){
+        rank=this->calcRank();
     }
     // print functions- expects printable type
     void printValue() const{
@@ -313,15 +338,25 @@ class AVL_Tree{
             connectNodes(found_spot,i,L);
         }
         i->setHeight(0);
-        //
 
-        //iterates over the search path and update the heights accordingly, checks balance factor and do rolls accordingly
+        //update Ranks in the search path loop
+        Node_ptr itt=i;
+        //O(log(n) - iteration over the search path
+        while (itt!=nullptr){
+            itt->updateRank();
+            itt=itt->getParent();
+        }
+        itt.reset();
+        //
+        //iterates over the search path and update the heights and rank accordingly, checks balance factor and do rolls accordingly
         //O(log(n)) - iteratation over the search path is log(n) , rolls are O(1)
         Node_ptr parent = i->getParent();
         int bf;
         while(i!=root){ 
             bf=balance_factor(parent);
+            //?
             parent->updateHeight();
+            //
             if(bf>1){
                 //left
                 if(balance_factor(i)>0){
@@ -418,6 +453,7 @@ class AVL_Tree{
         Node_ptr j=i;//temporary iterator
         while (j!=nullptr){
             j->updateHeight();
+            j->updateRank();
             j=j->getParent();
         }
         j.reset();
@@ -457,6 +493,38 @@ class AVL_Tree{
             i=i->getParent();
         }
         return true;
+    }
+    //select kth smallest node
+    Node_ptr select(int k){
+        int tree_size=root->getRank();
+        if (k>tree_size){
+            //there is no kth element because there are less than k elements
+            return nullptr;
+        }
+        Node_ptr left=root->getLeft();
+        int left_rank=0;
+        Node_ptr itt=root;
+        if (left!=nullptr){
+            left_rank=left->getRank();
+        }
+        while(left_rank+1!=k){
+            if (left_rank>=k){
+                itt=itt->getLeft();
+            }
+            else{
+                itt=itt->getRight();
+                k=k-(left_rank+1);
+            }
+            if (itt==nullptr){
+                throw std::runtime_error("this shouldn't happen, ever");
+            }
+            left=itt->getLeft();
+            left_rank=0;
+            if (left!=nullptr){
+                left_rank=left->getRank();
+            }
+        }
+        return itt;
     }
 
     int getHeight() const{
@@ -696,6 +764,9 @@ void roll_ll(Node_ptr<KEY,VAL>& old_root){
     connectNodes(old_root,LR_Tree,L);
 
     old_root->updateHeight();
+    old_root->updateRank();
+    new_root->updateHeight();
+    new_root->updateRank();
 
     old_root=new_root;
 
@@ -720,6 +791,9 @@ void roll_rr(Node_ptr<KEY,VAL>& old_root){
     
     //handles new heights
     old_root->updateHeight();
+    old_root->updateRank();
+    new_root->updateHeight();
+    new_root->updateRank();
 
     old_root=new_root;
 }
@@ -748,10 +822,13 @@ void roll_lr(Node_ptr<KEY,VAL>& old_root){
     //handle left pointers
     connectNodes(left,LRL_Tree,R);
 
-    //corrects heights
+    //corrects heights and ranks
     old_root->updateHeight();
+    old_root->updateRank();
     left->updateHeight();
+    left->updateRank();
     new_root->updateHeight();
+    new_root->updateRank();
     
     old_root=new_root;
 }
@@ -778,10 +855,13 @@ void roll_rl(Node_ptr<KEY,VAL>& old_root){
     //handle right pointers
     connectNodes(right,RLR_Tree,L);
 
-    //handles new heights
+    //handles new heights and ranks
     old_root->updateHeight();
+    old_root->updateRank();
     right->updateHeight();
+    right->updateRank();
     new_root->updateHeight();
+    new_root->updateRank();
 
     old_root=new_root;
 }

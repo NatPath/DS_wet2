@@ -25,7 +25,8 @@ class HashTable{
    void expand(){
        List<T>* temp_data;
        try{
-           temp_data=new List<T>[2*_size];
+           _size*=2;
+           temp_data=new List<T>[_size];
            //rehash all elements
            for (i = 0; i < _size; i++)
            {
@@ -33,7 +34,7 @@ class HashTable{
                ListNode<T>* itt= _data_chains[i].getRoot();
                ListNode<T>* next;
                while(itt!=nullptr){
-                    int key=hash_function_modified(itt->getValue.get,2*_size);
+                    int key=hash_function(itt->getValue.get);
                     next = itt->getNext();
                     _temp_data[key].add(*itt);
                     itt = next;
@@ -41,10 +42,10 @@ class HashTable{
            }
        }
        catch(){
+           _size=_size/2;
            delete[] temp_data;
        }
        delete[] _data_chains;
-       _size*=2;
        _data_chains=temp_data;
        
    }
