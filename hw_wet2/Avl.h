@@ -270,7 +270,13 @@ class AVL_Tree{
         return root->getKey();
     }
 
-
+    
+     /*
+        returns the number of nodes in the tree, which is the rank of its root
+    */
+    int getNumNodes(){
+        return root->rank;
+    }
     
     /*
     * Gets a key, searches for the vertex in the AVL with the key. 

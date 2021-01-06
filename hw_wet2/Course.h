@@ -13,8 +13,8 @@ class Course{
 
     public:
         Course(int courseID);
-        Course(const Course& copy) = default;
-        Course& operator=(const Course& copy) = default;
+        Course(Course& copy) = default;
+        Course& operator=(Course& copy) = default;
 
         /*
         * returns reference to the lecture dynamic array

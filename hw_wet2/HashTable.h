@@ -15,8 +15,13 @@ class HashTable{
 
    int hash_function(T& to_hash) const{
        int key=to_hash.get_id();
+       return hash_id(key);
+   } 
+
+   int hash_id(int id) const{
        return key%_size;
    } 
+
    int hash_function_modified(T& to_hash,int size) const{
        int key=to_hash.get_id();
        return key%size;
@@ -58,9 +63,20 @@ class HashTable{
        int table_index=hash_function(to_find);
        return _data_chains.find(to_find);
    }
-   void insert(T& to_insert){
+
+   T* findValue(int id){
+       
+    ListNode<T> res = _data_chains.find(hash_id(id));
+    if(res){
+        return res.getValue()->get();
+    }
+    return nullptr;
+
+   }
+
+   bool insert(T& to_insert){
        if (find(to_insert)!=nullptr){
-           return;
+           return false;
        }
        else{
            int key=hash_function(to_insert);
@@ -69,12 +85,19 @@ class HashTable{
            if (getOverLoadFactor()>2){
                expand();
            }
+           return true;
        }
    }
+
    void remove(T& to_remove){
        _data_chains[hash_function(to_remove)].remove(to_remove);
-
    }
+
+    void removeKey(T& to_remove){
+       _data_chains[hash_function(to_remove)].remove(to_remove);
+   }
+
+  
 
    ~HashTable(){
        delete[] _data_chains;
