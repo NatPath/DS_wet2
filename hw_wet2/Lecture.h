@@ -1,5 +1,6 @@
 #ifndef _LECTURE_H_
 #define _LECTURE_H_
+#include <iostream>
 
 class Lecture{
 
@@ -8,7 +9,7 @@ class Lecture{
     int num_views;
 
     public:
-    Lecture(int courseID, int lectureID,int time=0):courseID(courseID),lectureID(lectureID),num_views(time){}
+    Lecture(int courseID=0, int lectureID=0,int time=0):courseID(courseID),lectureID(lectureID),num_views(time){}
     //increse number of views by 'to_add'
     void addViews(int to_add){
         num_views+=to_add;
@@ -50,7 +51,15 @@ class Lecture{
     bool operator<(const Lecture& compare) const;
     bool operator>=(const Lecture& compare) const;
     bool operator<=(const Lecture& compare) const;
-                
+
+    friend std::ostream& operator<<(std::ostream& os,const Lecture& lecture);
 };
+std::ostream& operator<<(std::ostream& os,const Lecture& lecture){
+    os<<"~~Printing Lecture~~"<<std::endl;    
+    os<<"Course ID:" <<lecture.courseID<<std::endl;    
+    os<<"Lecture ID:" <<lecture.courseID<<std::endl;    
+    os<<"num_views :" <<lecture.num_views<<std::endl;    
+    os<<"~~~~~~~~~~~~~~~~~~~~"<<std::endl;    
+}
 
 #endif

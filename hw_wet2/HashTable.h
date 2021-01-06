@@ -17,10 +17,15 @@ class HashTable{
        int key=to_hash.get_id();
        return key%_size;
    } 
-   //
+   int hash_function_modified(T& to_hash,int size) const{
+       int key=to_hash.get_id();
+       return key%size;
+   } 
+   //expands the hashtable size by 2 and rehashes all the elements
    void expand(){
+       List<T>* temp_data;
        try{
-           List<T>* temp_data=new List<T>[2*_size];
+           temp_data=new List<T>[2*_size];
            //rehash all elements
            for (i = 0; i < _size; i++)
            {
@@ -28,22 +33,25 @@ class HashTable{
                ListNode<T>* itt= _data_chains[i].getRoot();
                ListNode<T>* next;
                while(itt!=nullptr){
-                    int key=hash_function(itt->getValue.get);
+                    int key=hash_function_modified(itt->getValue.get,2*_size);
                     next = itt->getNext();
-                    _data_chains[key].add(*itt);
+                    _temp_data[key].add(*itt);
                     itt = next;
-                                      
                }
            }
        }
        catch(){
            delete[] temp_data;
        }
+       delete[] _data_chains;
+       _size*=2;
+       _data_chains=temp_data;
+       
    }
    public:
-   HashTable(){
-       _size=2;//?
-       _data_chains = new List<T>[_size];
+   HashTable(int size=2){
+       _size=size;
+       _data_chains=new List<T>[_size];
    }
    ListNode<T>& find(T& to_find){
        int table_index=hash_function(to_find);
@@ -62,22 +70,6 @@ class HashTable{
            }
        }
    }
-   /*
-   void insert(ListNode<T>& to_insert){
-      
-       if (find(to_insert.getValue().get)!=nullptr){
-           return;
-       }
-       else{
-           int key=hash_function(to_insert.getValue().get);
-           _data_chains[key].add(to_insert);
-           _counter++;
-           if (getOverLoadFactor()>2){
-               expand();
-           }
-       }
-   }
-   */
    void remove(T& to_remove){
        _data_chains[hash_function(to_remove)].remove(to_remove);
 

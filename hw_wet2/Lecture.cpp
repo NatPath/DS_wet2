@@ -33,3 +33,12 @@ bool Lecture::operator>(const Lecture& compare) const{
 bool Lecture::operator<(const Lecture& compare) const{
     return !(*this>compare)&&(*this!=compare);
 }
+
+std::ostream& operator<<(std::ostream& os,const Lecture& lecture){
+    os<<"~~Printing Lecture~~"<<std::endl;    
+    os<<"Course ID:" <<lecture.courseID<<std::endl;    
+    os<<"Lecture ID:" <<lecture.courseID<<std::endl;    
+    os<<"num_views :" <<lecture.num_views<<std::endl;    
+    os<<"~~~~~~~~~~~~~~~~~~~~"<<std::endl;    
+
+}

@@ -1,6 +1,8 @@
 #ifndef _DARRAY_H
 #include <exception>
 #include <stdexcept>
+#include "Auxiliaries.h"
+#include "Course.h"
 
 template <class T>
 class DynamicArray{
@@ -121,7 +123,7 @@ class DynamicArray{
         delete[] _data;
     }
     void printArray(){
-        for (int i=0;i<_size;i++){
+        for (int i=0;i<_counter;i++){
             print(_data[i]);
         }
     }
