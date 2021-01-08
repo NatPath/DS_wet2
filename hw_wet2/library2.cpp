@@ -33,7 +33,7 @@ StatusType AddClass(void* DS, int courseID, int* classID){
         return StatusType::INVALID_INPUT;
     }
     Boom* converted = static_cast<Boom*>(DS);
-    return converted->RemoveCourse(courseID);
+    return converted->AddClass(courseID,classID);
 }
 
 

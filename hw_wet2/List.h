@@ -104,6 +104,7 @@ class List{
             if(*(i->getValue()) == value){
                 return i;
             }
+            i = i->getNext();
         }
         return nullptr;
     }

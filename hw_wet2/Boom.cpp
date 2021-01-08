@@ -98,5 +98,9 @@ StatusType Boom::GetIthWatchedClass(int i, int* courseID, int* classID){
 // consider changing
 Course* Boom::findValue(int courseID){
     Course dummy(courseID);
-    return courses.find(dummy)->getValue().get();
+    ListNode<Course>* found = courses.find(dummy);
+    if(!found){
+        return nullptr;
+    }
+    return found->getValue().get();
 }
