@@ -83,11 +83,12 @@ StatusType Boom::AddClass(int courseID, int* classID){
 }
 
 StatusType Boom::GetIthWatchedClass(int i, int* courseID, int* classID){
-    // select needs to return the ith largest node, not smallest
+    
     if(i>lectures.getNumNodes()){
         return StatusType::FAILURE;
     }
-    Lecture selected = lectures.select(i)->getValue();
+    // get the ith largest node
+    Lecture selected = lectures.select(lectures.getNumNodes()-i+1)->getValue();
     *courseID = selected.getCourseID();
     *classID = selected.getLectureID();
     return StatusType::SUCCESS;
