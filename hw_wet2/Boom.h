@@ -11,6 +11,8 @@ class Boom{
     HashTable<Course> courses;
     AVL_Tree<Lecture,Lecture> lectures;
 
+    Course* findValue(int courseID);
+
 
     public:
         Boom() = default;

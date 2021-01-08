@@ -75,15 +75,6 @@ class List{
     ListNode<T>* root;
  
 
-    ListNode<T>*  find(const T& value){
-        ListNode<T>*  i=root;
-        while(i){
-            if(i->getValue() == value){
-                return i;
-            }
-        }
-        return nullptr;
-    }
 
   
 
@@ -104,6 +95,17 @@ class List{
             new_itt=new_itt->getNext();
         }
 
+    }
+
+    
+    ListNode<T>*  find( T& value){
+        ListNode<T>*  i=root;
+        while(i){
+            if(*(i->getValue()) == value){
+                return i;
+            }
+        }
+        return nullptr;
     }
 
     ListNode<T>* getRoot() const{

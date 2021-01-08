@@ -38,7 +38,7 @@ class DynamicArray{
             throw std::runtime_error("Failed to copy Dynamic Array");
         }
         delete[] _data;
-        _counter=to_copy.counter;
+        _counter=to_copy._counter;
         _size=temp_size;
         _data=temp_data;
     }
@@ -59,10 +59,12 @@ class DynamicArray{
             _size = new_size;
             _counter = to_assign.getCounter();
             _data = temp_data;
+            
         }
         catch(...){
             delete[] temp_data;
         }
+        return *this;
     }
 
     void push(T new_value){

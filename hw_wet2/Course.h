@@ -13,7 +13,7 @@ class Course{
 
     public:
         Course(int courseID);
-        Course(Course& copy) = default;
+        Course( Course& copy) =default;
         Course& operator=(Course& copy) = default;
 
         /*
@@ -34,9 +34,13 @@ class Course{
         * returns number of classes
         */
         int getNumOfClasses();
+        /*
+        * compares courses by comparing their id
+        */
+        bool operator==(Course other);
 
 
-        ~Course();
+        ~Course() = default;
 
 
 };

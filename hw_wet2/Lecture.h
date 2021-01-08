@@ -54,13 +54,6 @@ class Lecture{
 
     friend std::ostream& operator<<(std::ostream& os,const Lecture& lecture);
 };
-std::ostream& operator<<(std::ostream& os,const Lecture& lecture){
-    os<<"~~Printing Lecture~~"<<std::endl;    
-    os<<"Course ID:" <<lecture.courseID<<std::endl;    
-    os<<"Lecture ID:" <<lecture.courseID<<std::endl;    
-    os<<"num_views :" <<lecture.num_views<<std::endl;    
-    os<<"~~~~~~~~~~~~~~~~~~~~"<<std::endl;    
-    return os;
-}
+std::ostream& operator<<(std::ostream& os,const Lecture& lecture);
 
 #endif

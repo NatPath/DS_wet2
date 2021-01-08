@@ -19,7 +19,7 @@ StatusType Boom::AddCourse(int courseID){
 StatusType Boom::RemoveCourse(int courseID){
 
     // consider changing this
-    Course *to_remove = courses.findValue(courseID);
+    Course *to_remove = findValue(courseID);
     if(!to_remove){
         return StatusType::FAILURE;
     }
@@ -30,7 +30,7 @@ StatusType Boom::RemoveCourse(int courseID){
 
 StatusType Boom::AddClass(int courseID, int* classID){
     try{
-        Course *to_add = courses.findValue(courseID);
+        Course *to_add = findValue(courseID);
         if(!to_add){
             return StatusType::FAILURE;
         }
@@ -43,10 +43,11 @@ StatusType Boom::AddClass(int courseID, int* classID){
     }
  }
 
+
  StatusType Boom::WatchClass(int courseID, int classID, int time){
     try{
        
-        Course *to_watch = courses.findValue(courseID);
+        Course *to_watch = findValue(courseID);
         if(classID+1>to_watch->getLectureArray().getCounter()){
             return StatusType::INVALID_INPUT;
         }
@@ -70,7 +71,7 @@ StatusType Boom::AddClass(int courseID, int* classID){
  }
 
  StatusType Boom::TimeViewed(int courseID, int classID, int* timeViewed){
-    Course *found_course = courses.findValue(courseID);
+    Course *found_course = findValue(courseID);
     if(classID+1>found_course->getLectureArray().getCounter()){
             return StatusType::INVALID_INPUT;
     }
@@ -92,4 +93,10 @@ StatusType Boom::GetIthWatchedClass(int i, int* courseID, int* classID){
     *courseID = selected.getCourseID();
     *classID = selected.getLectureID();
     return StatusType::SUCCESS;
+}
+
+// consider changing
+Course* Boom::findValue(int courseID){
+    Course dummy(courseID);
+    return courses.find(dummy)->getValue().get();
 }

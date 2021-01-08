@@ -19,7 +19,7 @@ class HashTable{
    } 
 
    int hash_id(int id) const{
-       return key%_size;
+       return id%_size;
    } 
 
    int hash_function_modified(T& to_hash,int size) const{
@@ -33,20 +33,20 @@ class HashTable{
            _size*=2;
            temp_data=new List<T>[_size];
            //rehash all elements
-           for (i = 0; i < _size; i++)
+           for (int i = 0; i < _size; i++)
            {
                //iterate over a chain
                ListNode<T>* itt= _data_chains[i].getRoot();
                ListNode<T>* next;
                while(itt!=nullptr){
-                    int key=hash_function(itt->getValue.get);
+                    int key=hash_function(*(itt->getValue()));
                     next = itt->getNext();
-                    _temp_data[key].add(*itt);
+                    temp_data[key].add(itt);
                     itt = next;
                }
            }
        }
-       catch(){
+       catch(...){
            _size=_size/2;
            delete[] temp_data;
        }
@@ -59,20 +59,21 @@ class HashTable{
        _size=size;
        _data_chains=new List<T>[_size];
    }
-   ListNode<T>& find(T& to_find){
-       int table_index=hash_function(to_find);
-       return _data_chains.find(to_find);
+   ListNode<T>* find(T& to_find){
+      int table_index=hash_function(to_find);
+       return _data_chains[table_index].find(to_find);
    }
-
+/*
    T* findValue(int id){
        
-    ListNode<T> res = _data_chains.find(hash_id(id));
+    //ListNode<T>* res = _data_chains[(hash_id(id)]->find);
     if(res){
-        return res.getValue()->get();
+        return res->getValue().get();
     }
     return nullptr;
 
    }
+   */
 
    bool insert(T& to_insert){
        if (find(to_insert)!=nullptr){

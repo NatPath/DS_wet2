@@ -22,4 +22,8 @@ Lecture& Course::getLecture(int classID){
     return lecture_arr[classID];
 }
 
+bool Course::operator==(Course other){
+    return courseID==other.courseID;
+}
+
 

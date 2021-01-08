@@ -275,7 +275,7 @@ class AVL_Tree{
         returns the number of nodes in the tree, which is the rank of its root
     */
     int getNumNodes(){
-        return root->rank+1;
+        return (root->getRank()+1);
     }
     
     /*
