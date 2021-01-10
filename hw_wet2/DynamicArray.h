@@ -1,4 +1,5 @@
 #ifndef _DARRAY_H
+#define _DARRAY_H
 #include <exception>
 #include <stdexcept>
 #include "Auxiliaries.h"

@@ -1,11 +1,13 @@
 #ifndef _HASH_TABLE_H
 #include <exception>
 #include "List.h"
+#include "DynamicArray.h"
 
 template<class T>
 class HashTable{
 
    List<T>* _data_chains;
+   //DynamicArray<List<T>> _data_chains;
    int _size;
    int _counter;
    
@@ -29,34 +31,55 @@ class HashTable{
    //expands the hashtable size by 2 and rehashes all the elements
    void expand(){
        List<T>* temp_data;
+       _size=_size*2;
        try{
-           _size*=2;
            temp_data=new List<T>[_size];
            //rehash all elements
-           for (int i = 0; i < _size; i++)
+           for (int i = 0; i < _size/2; i++)
            {
                //iterate over a chain
                ListNode<T>* itt= _data_chains[i].getRoot();
                ListNode<T>* next;
                while(itt!=nullptr){
                     int key=hash_function(*(itt->getValue()));
+                    //takes node out of original list
                     next = itt->getNext();
+                    if(next!=nullptr){
+                        next->setPrev(nullptr);
+                    }
+                    _data_chains[i].setRoot(next);
+                    //let the node know about it                    
+                    itt->orphanateNode();
+                    //transfer node to new list
                     temp_data[key].add(itt);
-                    itt = next;
+                    itt = _data_chains[i].getRoot();
                }
            }
+           delete[] _data_chains;
+           _data_chains=temp_data;
        }
        catch(...){
            _size=_size/2;
            delete[] temp_data;
        }
-       delete[] _data_chains;
-       _data_chains=temp_data;
        
+       
+   }
+   void expand2(){
+        HashTable* new_hash_table(_size*2);
+        for (int i=0;i<_size;i++){
+            new_hash_table->insert();
+        }
+        this=new_hash_table;
+   }
+   void contract(){
+
+
    }
    public:
    HashTable(int size=2){
        _size=size;
+       _counter=0;
        _data_chains=new List<T>[_size];
    }
    ListNode<T>* find(T& to_find){
@@ -86,6 +109,17 @@ class HashTable{
            if (getOverLoadFactor()>2){
                expand();
            }
+           return true;
+       }
+   }
+   bool insert2(ListNode<T>& to_insert){
+       if (find(to_insert.getValue().get)!=nullptr){
+           return false;
+       }
+       else{
+           int key=hash_function(to_insert.getValue().get);
+           _data_chains[key].add(to_insert);
+           _counter++;
            return true;
        }
    }

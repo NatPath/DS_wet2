@@ -13,7 +13,12 @@ class ListNode{
     ListNode<T>* prev;
 
     public:
-    ListNode()=default;
+    ListNode(){
+        value=nullptr;
+        next=nullptr;
+        prev=nullptr;
+        return;
+    };
     ListNode(const Value_ptr value):value(value),next(nullptr),prev(nullptr){}
     ListNode(const ListNode<T>& to_copy){
         if(to_copy){
@@ -39,6 +44,13 @@ class ListNode{
     ListNode<T>* getPrev(){
         return prev;
     }
+    void setNext(ListNode<T>* new_next){
+        next=new_next;
+
+    }
+    void setPrev(ListNode<T>* new_prev){
+        prev=new_prev;
+    }
 
     void setValue(Value_ptr new_value) {
         value = new_value;
@@ -56,6 +68,15 @@ class ListNode{
         if(before){
             before->next =this;
         }
+    }
+    void orphanateNode(){
+        /*
+        if (prev!=nullptr){
+            prev->connectNext(next);
+        }
+        */
+        setNext(nullptr);
+        setPrev(nullptr);
     }
     void printValue(){
         if (value){

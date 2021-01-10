@@ -48,11 +48,12 @@ StatusType Boom::AddClass(int courseID, int* classID){
     try{
        
         Course *to_watch = findValue(courseID);
+        if(!to_watch){
+            //there is no such course
+            return StatusType::FAILURE;
+        }
         if(classID+1>to_watch->getLectureArray().getCounter()){
             return StatusType::INVALID_INPUT;
-        }
-        if(!to_watch){
-            return StatusType::FAILURE;
         }
 
         int old_time = to_watch->getLectureArray()[classID].getViews();
@@ -72,11 +73,11 @@ StatusType Boom::AddClass(int courseID, int* classID){
 
  StatusType Boom::TimeViewed(int courseID, int classID, int* timeViewed){
     Course *found_course = findValue(courseID);
-    if(classID+1>found_course->getLectureArray().getCounter()){
-            return StatusType::INVALID_INPUT;
-    }
     if(!found_course){
         return StatusType::FAILURE;
+    }
+    if(classID+1>found_course->getLectureArray().getCounter()){
+            return StatusType::INVALID_INPUT;
     }
     *timeViewed = found_course->getLectureArray()[classID].getViews();
     return StatusType::SUCCESS;
