@@ -31,16 +31,73 @@ class HashTable{
    //expands the hashtable size by 2 and rehashes all the elements
    void expand(){
        List<T>* temp_data;
+       int old_size=_size;
+       /*
+       print("printing table BEFORE");
+       printTable();
+       */
        _size=_size*2;
        try{
            temp_data=new List<T>[_size];
            //rehash all elements
-           for (int i = 0; i < _size/2; i++)
+           for (int i = 0; i < old_size; i++)
            {
                //iterate over a chain
                ListNode<T>* itt= _data_chains[i].getRoot();
                ListNode<T>* next;
-               while(itt!=nullptr){
+               while(itt){
+                    int key=hash_function(*(itt->getValue()));
+                    //takes node out of original list
+                    next = itt->getNext();
+                    if(next!=nullptr){
+                        next->setPrev(nullptr);
+                    }
+                    _data_chains[i].setRoot(next);
+                    //let the node know about it                    
+                    itt->orphanateNode();
+                    //transfer node to new list
+                    temp_data[key].add(itt);
+                    itt = _data_chains[i].getRoot();
+               }
+           }
+           delete[] _data_chains;
+           _data_chains=temp_data;
+           /*
+           print("printing table after");
+           printTable();
+           */
+       }
+       catch(...){
+           _size=old_size;
+           delete[] temp_data;
+       }
+   }
+   void printTable(){
+       for (int i=0;i<_size;i++){
+           print(i);
+           _data_chains[i].printList();
+       }
+   }
+   void expand2(){
+        HashTable* new_hash_table(_size*2);
+        for (int i=0;i<_size;i++){
+            new_hash_table->insert();
+        }
+        this=new_hash_table;
+   }
+   void contract(){
+       List<T>* temp_data;
+       int old_size=_size;
+       _size=_size/2;
+       try{
+           temp_data=new List<T>[_size];
+           //rehash all elements
+           for (int i = 0; i < old_size; i++)
+           {
+               //iterate over a chain
+               ListNode<T>* itt= _data_chains[i].getRoot();
+               ListNode<T>* next;
+               while(itt){
                     int key=hash_function(*(itt->getValue()));
                     //takes node out of original list
                     next = itt->getNext();
@@ -59,22 +116,9 @@ class HashTable{
            _data_chains=temp_data;
        }
        catch(...){
-           _size=_size/2;
+           _size=old_size;
            delete[] temp_data;
        }
-       
-       
-   }
-   void expand2(){
-        HashTable* new_hash_table(_size*2);
-        for (int i=0;i<_size;i++){
-            new_hash_table->insert();
-        }
-        this=new_hash_table;
-   }
-   void contract(){
-
-
    }
    public:
    HashTable(int size=2){
@@ -126,15 +170,14 @@ class HashTable{
 
    void remove(T& to_remove){
        _data_chains[hash_function(to_remove)].remove(to_remove);
+       _counter--;
+       if (getOverLoadFactor()<0.5){
+           contract();
+       }
    }
-
-    void removeKey(T& to_remove){
-       _data_chains[hash_function(to_remove)].remove(to_remove);
-   }
-
-  
 
    ~HashTable(){
+       expand();
        delete[] _data_chains;
    }
 };

@@ -122,8 +122,10 @@ class List{
     ListNode<T>*  find( T& value){
         ListNode<T>*  i=root;
         while(i){
-            if(*(i->getValue()) == value){
-                return i;
+            if (i->getValue()){
+                if(*(i->getValue()) == value){
+                    return i;
+                }
             }
             i = i->getNext();
         }
@@ -170,19 +172,22 @@ class List{
         ListNode<T>* i=root;
 
        while(i){
-           if(*(i->getValue())==to_remove){
-               if (i->getPrev()){
-                   i->getPrev()->connectNext(i->getNext());
-                   delete i;
-               }
-               else{
-                   //deleting root
-                   root=i->getNext();
-                   delete i;
-               }
-               
-               return;
-           }
+            if(*(i->getValue())==to_remove){
+                if (i->getPrev()){
+                    i->getPrev()->connectNext(i->getNext());
+                    delete i;
+                }
+                else{
+                    //deleting root
+                    root=i->getNext();
+                    if(root){
+                        root->setPrev(nullptr);
+                    }
+                    delete i;
+                }
+                
+                return;
+            }
            i=i->getNext();
        }
 

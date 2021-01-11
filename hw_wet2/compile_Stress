@@ -1,0 +1,1 @@
+g++ -g -std=c++11 -DNDEBUG -Wall Course.cpp Lecture.cpp Boom.cpp library2.cpp TimeCheck.cpp -o test_stress.out

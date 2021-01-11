@@ -22,8 +22,17 @@ Lecture& Course::getLecture(int classID){
     return lecture_arr[classID];
 }
 
-bool Course::operator==(Course other){
+bool Course::operator==(Course& other){
     return courseID==other.courseID;
 }
+
+
+std::ostream& operator<<(std::ostream& os,const Course& course){
+    os<<"~~Printing Course~~"<<std::endl;    
+    os<<"Course ID:" <<course.courseID<<std::endl;    
+    os<<"~~~~~~~~~~~~~~~~~~~~"<<std::endl;    
+    return os;
+}
+
 
 

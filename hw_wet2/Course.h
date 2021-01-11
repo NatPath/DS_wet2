@@ -37,12 +37,14 @@ class Course{
         /*
         * compares courses by comparing their id
         */
-        bool operator==(Course other);
+        bool operator==(Course& other);
 
 
         ~Course() = default;
 
-
+        friend std::ostream& operator<<(std::ostream& os,const Course& course);
 };
+std::ostream& operator<<(std::ostream& os,const Course& course);
+
 
 #endif
