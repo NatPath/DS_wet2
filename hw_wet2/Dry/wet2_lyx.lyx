@@ -116,7 +116,7 @@
 \begin_inset Formula $AVL\text{\_}Tree<KEY,VAL>$
 \end_inset
 
- - עץ דרגות המבוסס על עץ 
+ - עץ דרגות מאוזן המבוסס על עץ 
 \begin_inset Formula $AVL$
 \end_inset
 
@@ -124,7 +124,11 @@
 \end_layout
 
 \begin_layout Standard
-גנרי דו כיווני )הורה מצביע לילד וילד מצביע להורה( כפי שנלמד בהרצאה.
+עץ 
+\begin_inset Formula $Avl$
+\end_inset
+
+ גנרי דו כיווני )הורה מצביע לילד וילד מצביע להורה(, כפי שנלמד בהרצאה.
 \end_layout
 
 \begin_layout Standard
@@ -134,6 +138,35 @@
 
 \begin_layout Standard
 הפעולות המוגדרות וסיבוכיות הזמן והמקום של המבנה כפי שנלמדו בכיתה.
+\end_layout
+
+\begin_layout Standard
+)*גם הפעולה 
+\begin_inset Formula $select(k)$
+\end_inset
+
+ נעשית בסיבוכיות זמן ומקום 
+\begin_inset Formula $O(logn)$
+\end_inset
+
+ , בדומה לחיפוש בעץ מאוזן.
+\end_layout
+
+\begin_layout Standard
+במהלך החיפוש של הצומת בעלת הדרגה ה
+\begin_inset Formula $k$
+\end_inset
+
+ אנו עוברים בכל רמה בעץ פעם אחת לכל היותר ולכן 
+\begin_inset Formula $O(h)$
+\end_inset
+
+ .
+ וכיוון שהעץ הוא מאוזן החיפוש נעשה ב
+\begin_inset Formula $O(logn)$
+\end_inset
+
+ .(
 \end_layout
 
 \begin_layout Subsection*
@@ -375,7 +408,7 @@
 \begin_inset Formula $num\text{\_}views$
 \end_inset
 
- - מספר טבעי אי שלילי המייצגג כמה צפיות יש להרצאה.
+ - מספר טבעי אי שלילי המייצג כמה צפיות יש להרצאה.
 \end_layout
 
 \begin_layout Standard
@@ -1002,16 +1035,39 @@ status open
 \end_layout
 
 \begin_layout Standard
-הוספת ההרצאה היא הוספה למערך הדינמי של הרצאות הנמצא בכל קורס, ולכן היא מתבצעת
- ב
+הוספת ההרצאה היא הוספת איבר חדש למערך הדינמי של ההרצאות בקורס שמצאנו.
+\end_layout
+
+\begin_layout Standard
+אתחול של הרצאה נעשה ב 
 \begin_inset Formula $O(1)$
 \end_inset
 
- בממוצע על הקלט משוערך, ולכן זוהי סיבוכיות הזמן של 
+ .
+\end_layout
+
+\begin_layout Standard
+הכנסה למערך דינמי מתבצעת ב
+\begin_inset Formula $O(1)$
+\end_inset
+
+ בממוצע על הקלט משוערך.
+\end_layout
+
+\begin_layout Standard
+לכן סה
+\begin_inset Quotes erd
+\end_inset
+
+כ סיבוכיות הזמן של 
 \begin_inset Formula $AddClass$
 \end_inset
 
-.
+ היא 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ בממוצע על הקלט משוערך .
 \end_layout
 
 \begin_layout Standard
@@ -1076,7 +1132,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-מציאת ההרצאה במערך הדינמי היא 
+מציאת ההרצאה במערך הדינמי של הקורס המאחסן את ההרצאות היא 
 \begin_inset Formula $O(1)$
 \end_inset
 
@@ -1108,7 +1164,7 @@ status open
 \end_inset
 
  על עץ הדרגות כפי שנלמד בתרגול, ב
-\begin_inset Formula $log(M)$
+\begin_inset Formula $O(log(M))$
 \end_inset
 
 .
@@ -1349,7 +1405,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-נעיר חיפוש בעץ דרגות מבוסס 
+נעיר שחיפוש בעץ דרגות מבוסס 
 \begin_inset Formula $AVL$
 \end_inset
 
