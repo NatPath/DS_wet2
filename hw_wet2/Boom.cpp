@@ -25,7 +25,15 @@ StatusType Boom::RemoveCourse(int courseID){
         {
             return StatusType::FAILURE;
         }
+
+        DynamicArray<Lecture> remove_lectures = to_remove->getLectureArray();
+   
+        for(int i = 0; i < remove_lectures.getSize(); i++){
+            lectures.deleteNode(remove_lectures[i]);
+        }
+
         courses.remove(*to_remove);
+
         return StatusType::SUCCESS;
     }
     catch (const std::bad_alloc &e)

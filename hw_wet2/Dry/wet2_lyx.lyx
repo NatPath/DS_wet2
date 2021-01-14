@@ -1,0 +1,1404 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language hebrew
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "David"
+\font_sans "default" "David"
+\font_typewriter "default" "David"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts true
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+מבני נתונים - תרגיל רטוב
+\family roman
+\series medium
+\shape up
+\size largest
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+2
+\end_layout
+
+\begin_layout Section*
+מבני הנתונים וטיפוסים בהם השתמשנו
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula $AVL\text{\_}Tree<KEY,VAL>$
+\end_inset
+
+ - עץ דרגות המבוסס על עץ 
+\begin_inset Formula $AVL$
+\end_inset
+
+ :
+\end_layout
+
+\begin_layout Standard
+גנרי דו כיווני )הורה מצביע לילד וילד מצביע להורה( כפי שנלמד בהרצאה.
+\end_layout
+
+\begin_layout Standard
+הצמתים ממוינים לפי ערך המפתח.
+ כל צומת מכיל מפתח, ערך, ואת מספר הצמתים בתת העץ ששורשו הוא אותו צומת.
+\end_layout
+
+\begin_layout Standard
+הפעולות המוגדרות וסיבוכיות הזמן והמקום של המבנה כפי שנלמדו בכיתה.
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula $List<T>$
+\end_inset
+
+ - רשימה מקושרת דו כיוונית:
+\end_layout
+
+\begin_layout Standard
+אברי הרשימה הם טיפוס 
+\begin_inset Formula $ListNode<T>$
+\end_inset
+
+ , המכיל פוינטר חכם ל ערך 
+\begin_inset Formula $T$
+\end_inset
+
+ ,מצביע לאיבר לפני ברשימה ומצביע לאיבר אחרי ברשימה.
+\end_layout
+
+\begin_layout Standard
+הפעולות המוגדרות וסיבוכיות הזמן והמקום של המבנה כפי שנלמדו בכיתה.
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula $DynamicArray<T>$
+\end_inset
+
+ - מערך דינמי:
+\end_layout
+
+\begin_layout Standard
+מערך התומך בהוספה למיקום הראשון הפנוי והגדלת המערך פי שתיים לאחר הוספה למיקום
+ האחרון הפנוי.
+\end_layout
+
+\begin_layout Standard
+הפעולות המוגדרות וסיבוכיות הזמן והמקום של המבנה כפי שנלמדו בכיתה.
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula $HashTable<T>$
+\end_inset
+
+ - טבל ערבול דינמית:
+\end_layout
+
+\begin_layout Standard
+טבלת ערבול בשיטת 
+\begin_inset Formula $chain\ hashing$
+\end_inset
+
+ הבנויה על עיקרון מערך דינמי.
+\end_layout
+
+\begin_layout Standard
+הטבלה מחזיקה מערך של רשימות לטיפוס המאוחסן.
+\end_layout
+
+\begin_layout Standard
+בהוספת אובייקט לטבלה, אם ההוספה מגדילה את פקטור העומס ליותר מ
+\numeric on
+2
+\numeric off
+, מערך הרשימות גדל פי
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+2
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+והאובייקטים עוברים ערבול מחדש.
+\end_layout
+
+\begin_layout Standard
+בהסרת אובייקט מהטבלה, אם ההסרה מקטינה את פקטור העומס לפחות מ
+\begin_inset Formula $0.5$
+\end_inset
+
+, מערך הרשימות קטן פי
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+2
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+והאובייקטים עוברים ערבול מחדש.
+ 
+\end_layout
+
+\begin_layout Standard
+פונקציית הערבול הנבחרת היא מציאת מודולו גודל הטבלה: 
+\begin_inset Formula $id\%size$
+\end_inset
+
+ כאשר 
+\begin_inset Formula $size$
+\end_inset
+
+ הוא גודל הטבלה.
+\end_layout
+
+\begin_layout Standard
+שאר הפעולות, וסיבוכיות הזמן והמקום של המבנה, כפי שנלמדו בכיתה.
+\end_layout
+
+\begin_layout Subsubsection*
+\begin_inset Formula $Lecture$
+\end_inset
+
+ -אוביקט המייצג הרצאה:
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+שדות:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $courseID$
+\end_inset
+
+ -מספר טבעי חיובי )
+\begin_inset Formula $int$
+\end_inset
+
+( המייצג את מזהה הקורס שאליו שייכת ההרצאה.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $lectureID$
+\end_inset
+
+ - מספר טבעי אי שלילי )
+\begin_inset Formula $int$
+\end_inset
+
+( המייצג את מזהה ההרצאה.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $num\text{\_}views$
+\end_inset
+
+ - מספר טבעי אי שלילי המייצגג כמה צפיות יש להרצאה.
+\end_layout
+
+\begin_layout Standard
+לאובייקט הנ
+\begin_inset Quotes erd
+\end_inset
+
+ל מוגדר יחס סדר בעזרת אופרטורי השוואה) גדול , קטן , שווה( המוגדר באופן הבא:
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+1
+\numeric off
+( לפי 
+\begin_inset Formula $num\text{\_}views$
+\end_inset
+
+ - מספר צפיות בסדר ירוד )הרצאה 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+ בעלת מספר צפיות גדול יותר מאלה של 
+\begin_inset Formula $l_{2}$
+\end_inset
+
+ תקיים 
+\begin_inset Formula $l_{1}>l_{2}$
+\end_inset
+
+(.
+\end_layout
+
+\begin_layout Standard
+אם מתקיים שוויון במספר הצפיות:
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+2
+\numeric off
+( לפי 
+\begin_inset Formula $courseID$
+\end_inset
+
+ - מזהה הקורס בסדר עולה ) בהינתן שוויון במספר הצפיות ,הרצאה 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+ בעלת מזהה קורס קטן מזה של 
+\begin_inset Formula $l_{2}$
+\end_inset
+
+ תקיים 
+\begin_inset Formula $l_{1}>l_{2}$
+\end_inset
+
+(.
+\end_layout
+
+\begin_layout Standard
+אם מתקיים שוויון גם במזהה הקורס:
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+3
+\numeric off
+( לפי 
+\begin_inset Formula $lectureID$
+\end_inset
+
+ - מזהה ההרצאה בסדר עולה.
+\end_layout
+
+\begin_layout Standard
+במידה ומתקיים שוויון בכל שלושת השדות, נגיד ש 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+ שווה ל 
+\begin_inset Formula $l_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+פעולות מוגדרות :
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+אתחול:
+\bar default
+ אתחול שדות המבנה.
+\end_layout
+
+\begin_layout Standard
+השמת מספר קבוע של ערכים מסוג 
+\begin_inset Formula $int$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+הוספת זמן צפיה:
+\bar default
+ עדכון שדה זמן הצפיה לפי פרמטר.
+\end_layout
+
+\begin_layout Standard
+עדכון שדה מסוג 
+\begin_inset Formula $int$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+שליפת זמן צפיה:
+\bar default
+ החזרת שדה זמן הצפיה.
+\end_layout
+
+\begin_layout Standard
+קריאה של שדה מסוג 
+\begin_inset Formula $int$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+אופרטורי השוואה:
+\bar default
+ השוואה בין הרצאות כפי שתוארה לעיל.
+\end_layout
+
+\begin_layout Standard
+השוואה של 
+\begin_inset Formula $int$
+\end_inset
+
+ים .
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+סיבוכיות זמן של כלל הפעולות:
+\end_layout
+
+\begin_layout Standard
+כל הפעולות הן בסיבוכיות זמן ומקום 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ )פעולות על מספר קבוע של 
+\begin_inset Formula $int$
+\end_inset
+
+ים(.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+סיבוכיות מקום:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $O(1)$
+\end_inset
+
+ , השדות של 
+\begin_inset Formula $Lecture$
+\end_inset
+
+ הן מספר קבוע של קבועים מסוג 
+\begin_inset Formula $int$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+הפעולות לא מקצות זכרון חדש ולכן גם הן 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ כל אחת.
+\end_layout
+
+\begin_layout Subsubsection*
+\begin_inset Formula $Course$
+\end_inset
+
+ - אוביקט המייצג קורס:
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+מטרה:
+\end_layout
+
+\begin_layout Standard
+מטרת המבנה היא להכיל את המידע הרלוונטי לקורס מסוים והרצאותיו.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+שדות:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $courseID$
+\end_inset
+
+ - מספר טבעי חיובי )
+\begin_inset Formula $int$
+\end_inset
+
+( המייצג את מזהה הקורס.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $lecture\text{\_}arr$
+\end_inset
+
+ - מערך דינמי של 
+\begin_inset Formula $Lecture$
+\end_inset
+
+, המאפשר גישה בזמן קבוע לכל ההרצאות של הקורס.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+פעולות מוגדרות:
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+אתחול )מפרמטרים או כהעתקה עמוקה(:
+\end_layout
+
+\begin_layout Standard
+אתחול השדות.
+ אתחול מערך דינמי ריק הוא ב 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ ולכן גם אתחול קורס הוא ב 
+\begin_inset Formula $O(1)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+אופרטור השמה:
+\end_layout
+
+\begin_layout Standard
+העתקה עמוקה של המערך הדינמי, מתבצעת ב 
+\begin_inset Formula $O(m)$
+\end_inset
+
+ כאשר 
+\begin_inset Formula $m$
+\end_inset
+
+ הוא מספר ההרצאות בקורס בעת ההשמה.
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+שליפת שדות:)
+\begin_inset Formula $Getters$
+\end_inset
+
+(:
+\end_layout
+
+\begin_layout Standard
+נעשה ב
+\begin_inset Formula $O(1)$
+\end_inset
+
+, כיוון שבשליפת במערך הדינמי מועבר רפרנס.
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+הריסה:
+\end_layout
+
+\begin_layout Standard
+הריסת המערך הדינמי – מעבר על מספר ההרצאות בקורס והריסתן אחת אחת ב
+\begin_inset Formula $O(m)$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+ֹ
+\bar under
+סיבוכיות מקום:
+\end_layout
+
+\begin_layout Standard
+המערך הדינמי שומר 
+\begin_inset Formula $m$
+\end_inset
+
+ הרצאות.
+ מעבר לכך, כל השדות שלו ושל הקורס הם טיפוסים פשוטים.
+\end_layout
+
+\begin_layout Standard
+מכאן שסיבוכיות המקום של 
+\begin_inset Formula $Course$
+\end_inset
+
+ היא 
+\begin_inset Formula $O(m)$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+נציין כי הפונקציות של הפעולות לא רקורסיביות ולא מקצות זכרון חדש ולכן סיבוכיות
+ המקום שלהן היא 
+\begin_inset Formula $O(1)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+\bar under
+תרשים של קורס עם 
+\begin_inset Formula $10$
+\end_inset
+
+הרצאות לדוגמא:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename course_diagram.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+אוביקט 
+\begin_inset Formula $Boom$
+\end_inset
+
+ ולו השדות הבאים:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $courses$
+\end_inset
+
+- טבלת ערבול של קורסים.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $lectures$
+\end_inset
+
+- עץ דרגות של 
+\begin_inset Formula $Lecture$
+\end_inset
+
+, ממוין לפי אופרטורי ההשוואה של מחלקת 
+\begin_inset Formula $Lecture$
+\end_inset
+
+.
+ כלומר, מספר צפיות בסדר יורד, לאחר מכן מזהה קורס בסדר עולה, ולאחר מכן מזהה
+ הרצאה בסדר עולה.
+\end_layout
+
+\begin_layout Standard
+עץ זה מכיל רק את ההרצאות שלהן יותר מ
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+0
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+צפיות.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+פעולות מוגדרות:
+\end_layout
+
+\begin_layout Standard
+אתחול - נקרא על ידי הפונקציה 
+\begin_inset Formula $Init$
+\end_inset
+
+ בממשק התרגיל:
+\end_layout
+
+\begin_layout Standard
+אתחול של טבלת הערבול ושל עץ הדרגות.
+ אתחול של כל אחד מהמבנים הללו הוא 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ ולכן אתחול המבנה הוא 
+\begin_inset Formula $O(1)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $AddCourse$
+\end_inset
+
+ - 
+\end_layout
+
+\begin_layout Standard
+מבצעת הוספה של קורס חדש לטבלה 
+\begin_inset Formula $courses$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+כנלמד בהרצאות, הכנסה לטבלת ערבול היא 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ בממוצע על הקלט, משוערך.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $RemoveCourse$
+\end_inset
+
+- 
+\end_layout
+
+\begin_layout Standard
+מבצעת הסרה של קורס מהטבלה 
+\begin_inset Formula $courses$
+\end_inset
+
+, ושל כל ההרצאות בעץ 
+\begin_inset Formula $lectures$
+\end_inset
+
+ ששייכות לקורס הזה ובעלות צפיות.
+ הסרה של הרצאה מהעץ היא בסיבוכיות זמן 
+\begin_inset Formula $O(logM)$
+\end_inset
+
+ כאשר 
+\begin_inset Formula $M$
+\end_inset
+
+ הוא מספר ההרצאות על פני כל הקורסים בעת ההוספה.
+\end_layout
+
+\begin_layout Standard
+עבור לא יותר מ
+\begin_inset Formula $m$
+\end_inset
+
+ הרצאות שמוסרות מהעץ, כאשר 
+\begin_inset Formula $m$
+\end_inset
+
+ הוא מספר ההרצאות בקורס המוסר, נקבל כי סיבוכיות הזמן של הסרת כל ההרצאות
+ היא 
+\begin_inset Formula $O(mlogM)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+בנוסף, מתבצעת הסרה של הקורס מטבלת הערבול, וסיבוכיות הזמן לכך היא 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ בממוצע על הקלט, משוערך.
+\end_layout
+
+\begin_layout Standard
+לכן סיבוכיות הזמן של הפעולה היא 
+\begin_inset Formula $O(mlogM)$
+\end_inset
+
+ בממוצע על הקלט, משוערך.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $AddClass$
+\end_inset
+
+-
+\end_layout
+
+\begin_layout Standard
+מוצאת את הקורס הרלבנטי לו רוצים להוסיף הרצאה.
+\end_layout
+
+\begin_layout Standard
+שליפה מטבלת ערבול היא ב
+\begin_inset Formula $O(1)$
+\end_inset
+
+ בממוצע על הקלט.
+\end_layout
+
+\begin_layout Standard
+הוספת ההרצאה היא הוספה למערך הדינמי של הרצאות הנמצא בכל קורס, ולכן היא מתבצעת
+ ב
+\begin_inset Formula $O(1)$
+\end_inset
+
+ בממוצע על הקלט משוערך, ולכן זוהי סיבוכיות הזמן של 
+\begin_inset Formula $AddClass$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $WatchClass$
+\end_inset
+
+- 
+\end_layout
+
+\begin_layout Standard
+מוסיף זמן צפייה להרצאה מסויימת.
+ עדכון מיקום ההרצאה בעץ 
+\begin_inset Formula $lectures$
+\end_inset
+
+ מתבצע על ידי הסרת ההרצאה אם היא כבר בעץ, הוספת הזמן הנדרש, והוספת ההרצאה
+ מחדש לעץ עם הזמן המעודכן.
+\end_layout
+
+\begin_layout Standard
+הוצאה והכנסה מעץ דרגות המבוסס על עץ 
+\begin_inset Formula $AVL$
+\end_inset
+
+ מתבצעות ב
+\begin_inset Formula $O(logM)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+גם כאשר 
+\begin_inset Formula $M=0$
+\end_inset
+
+, מתבצע מספר קבוע של פעולות מציאת הקורס הרלבנטי, ולכן על מנת למנוע מהביטוי
+ להתאפס ניתן לכתוב בסך הכל כי הפעולה מתבצעת בסיבוכיות זמן של 
+\begin_inset Formula $O(log(M+2))$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $TimeViewed$
+\end_inset
+
+ -
+\end_layout
+
+\begin_layout Standard
+מוצאת את הקורס הרלבנטי בו נמצאת ההרצאה המבוקשת.
+\end_layout
+
+\begin_layout Standard
+שליפה מטבלת ערבול היא ב
+\begin_inset Formula $O(1)$
+\end_inset
+
+ בממוצע על הקלט.
+\end_layout
+
+\begin_layout Standard
+מציאת ההרצאה במערך הדינמי היא 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ כיוון ש
+\begin_inset Formula $classID$
+\end_inset
+
+ הוא גם האינדקס של ההרצאה במערך.
+\end_layout
+
+\begin_layout Standard
+סך הכל הפעולה מתבצעת ב
+\begin_inset Formula $O(1)$
+\end_inset
+
+ בממוצע על הקלט.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $GetIthWatchedClass$
+\end_inset
+
+-
+\end_layout
+
+\begin_layout Standard
+מבצעת פעולת 
+\begin_inset Formula $select$
+\end_inset
+
+ על עץ הדרגות כפי שנלמד בתרגול, ב
+\begin_inset Formula $log(M)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+פעולת ה
+\begin_inset Formula $select$
+\end_inset
+
+ מוצאת את האיבר ה
+\begin_inset Formula $i$
+\end_inset
+
+ הכי קטן, ולכן כדי למצוא את האיבר ה
+\begin_inset Formula $i$
+\end_inset
+
+ הכי גדול נחפש באמצעות 
+\begin_inset Formula $select$
+\end_inset
+
+ את האיבר ה
+\begin_inset Formula $k-i+1$
+\end_inset
+
+ הכי קטן, כאשר 
+\begin_inset Formula $k$
+\end_inset
+
+ הוא מספר האיברים בעץ.
+\end_layout
+
+\begin_layout Standard
+כמו ב
+\begin_inset Formula $WatchClass$
+\end_inset
+
+ מתקיימות פעולות בזמן קבוע גם אם העץ ריק, ולכן ניתן סך הכל לכתוב כי סיבוכיות
+ הזמן היא 
+\begin_inset Formula $O(log(M+2))$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Quit$
+\end_inset
+
+ -
+\end_layout
+
+\begin_layout Standard
+שחרור הזכרון מהעץ ומהטבלה ואיפוס הפוינטרים.
+\end_layout
+
+\begin_layout Standard
+שחרור עץ נעשה באמצעות סיור 
+\begin_inset Formula $PostOrder$
+\end_inset
+
+ רקורסיבי על העצים.
+\end_layout
+
+\begin_layout Standard
+עץ ההרצאות משוחרר ב
+\begin_inset Formula $O(m)$
+\end_inset
+
+ כש
+\begin_inset Formula $m$
+\end_inset
+
+ מספר ההרצאות , כי כל איבר בעץ משתחרר ב 
+\begin_inset Formula $O(1)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+טבלת הקורסים משתחררת ב 
+\begin_inset Formula $O(n)$
+\end_inset
+
+ , נוכיח זאת:
+\end_layout
+
+\begin_layout Itemize
+אם 
+\begin_inset Formula $n\geq m$
+\end_inset
+
+: נסמן את מספר ההרצאות בקורס ה 
+\begin_inset Formula $i$
+\end_inset
+
+ ב 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+ .
+ מתקיים : 
+\begin_inset Formula $\sum_{i=1}^{m}m_{i}=m$
+\end_inset
+
+ , שכן סך ההרצאות בכל הקורסים הוא סך ההרצאות.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+שחרור צומת של הקורס ה 
+\begin_inset Formula $i$
+\end_inset
+
+ בעץ הקורסים היא 
+\begin_inset Formula $O(m_{i})$
+\end_inset
+
+ - שחרור של קורס כולל שחרור המערך הדינמי של ההרצאות שלו.
+ כל הרצאה משתחררת ב 
+\begin_inset Formula $O(1)$
+\end_inset
+
+, ולכן סך הכל קורס משתחרר ב
+\begin_inset Formula $O(m_{i})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+לכן שחרור סך הצמתים הוא :
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\sum_{i=1}^{n}O(n_{i})=O(\sum_{i=1}^{n}n_{i})=O(n)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+קבלנו אזי ששחרור מבנה הנתונים הוא 
+\begin_inset Formula $O(n)+O(n)=O(n)$
+\end_inset
+
+ ולכן גם 
+\begin_inset Formula $O(n+m)$
+\end_inset
+
+ כיוון שידוע ש 
+\begin_inset Formula $n\geq m$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Itemize
+אם 
+\begin_inset Formula $m>n$
+\end_inset
+
+, שחרור ההרצאות בכל קורס 
+\begin_inset Quotes eld
+\end_inset
+
+נבלע
+\begin_inset Quotes erd
+\end_inset
+
+ על ידי המעבר על כל אחד מהקורסים.
+ לכן כולל שחרור 
+\begin_inset Formula $n$
+\end_inset
+
+ ההרצאות נקבל כי הפעולה מתבצעת ב
+\begin_inset Formula $O(m+n)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+סיבוכיות מקום:
+\end_layout
+
+\begin_layout Standard
+המבנה מנהל זכרון של עץ דרגות עבור ההרצאות וטבלת ערבול עבור הקורסים.
+ 
+\end_layout
+
+\begin_layout Standard
+הזכרון הדרוש עבור עץ ההרצאות הוא 
+\begin_inset Formula $O(m)$
+\end_inset
+
+ כאשר 
+\begin_inset Formula $m$
+\end_inset
+
+ הוא מספר ההרצאות הכולל.
+\end_layout
+
+\begin_layout Standard
+הזכרון הדרוש עבור טבלת הקורסים הוא, משיקולים זהים לשיקולי סיבוכיות השחרור
+ של העץ שצוינו לעיל, 
+\begin_inset Formula $O(m+n)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+)
+\begin_inset Formula $\sum_{i=1}^{n}O(n_{i})=O(\sum_{i=1}^{n}n_{i})=O(n)$
+\end_inset
+
+(.
+\end_layout
+
+\begin_layout Standard
+לכן סך הכל סיבוכיות המקום של המבנה היא 
+\begin_inset Formula $O(m+n)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+נעיר חיפוש בעץ דרגות מבוסס 
+\begin_inset Formula $AVL$
+\end_inset
+
+, בין היתר לצורכי הוספה והסרה של איברים, ממומש אצלנו באמצעות רקורסיה.
+\end_layout
+
+\begin_layout Standard
+הפונקציה נקראת עבור כל איבר במסלול החיפוש של האיבר המבוקש.
+ במקרה הגרוע האיבר המבוקש לא נמצא בעץ ולכן עומק הרקורסיה יהיה כעומק העץ.
+ כידוע עץ 
+\begin_inset Formula $AVL$
+\end_inset
+
+ מאוזן ולכן עומק העץ הוא 
+\begin_inset Formula $O(log(n))$
+\end_inset
+
+, כלומר מחסנית הקריאות לא מוסיפה לסיבוכיות המקום.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+\bar under
+תרשים של 
+\begin_inset Formula $BoomDS$
+\end_inset
+
+ להמחשה:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename boomDs_figure.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
