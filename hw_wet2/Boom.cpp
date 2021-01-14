@@ -17,15 +17,21 @@ StatusType Boom::AddCourse(int courseID){
 }
 
 StatusType Boom::RemoveCourse(int courseID){
-
-    // consider changing this
-    Course *to_remove = findValue(courseID);
-    if(!to_remove){
-        return StatusType::FAILURE;
+    try
+    {
+        // consider changing this
+        Course *to_remove = findValue(courseID);
+        if (!to_remove)
+        {
+            return StatusType::FAILURE;
+        }
+        courses.remove(*to_remove);
+        return StatusType::SUCCESS;
     }
-    courses.remove(*to_remove);
-    return StatusType::SUCCESS;
-
+    catch (const std::bad_alloc &e)
+    {
+        return StatusType::ALLOCATION_ERROR;
+    }
 }
 
 StatusType Boom::AddClass(int courseID, int* classID){
@@ -72,28 +78,43 @@ StatusType Boom::AddClass(int courseID, int* classID){
  }
 
  StatusType Boom::TimeViewed(int courseID, int classID, int* timeViewed){
-    Course *found_course = findValue(courseID);
-    if(!found_course){
-        return StatusType::FAILURE;
-    }
-    if(classID+1>found_course->getLectureArray().getCounter()){
-            return StatusType::INVALID_INPUT;
-    }
-    *timeViewed = found_course->getLectureArray()[classID].getViews();
-    return StatusType::SUCCESS;
-
+     try
+     {
+         Course *found_course = findValue(courseID);
+         if (!found_course)
+         {
+             return StatusType::FAILURE;
+         }
+         if (classID + 1 > found_course->getLectureArray().getCounter())
+         {
+             return StatusType::INVALID_INPUT;
+         }
+         *timeViewed = found_course->getLectureArray()[classID].getViews();
+         return StatusType::SUCCESS;
+     }
+     catch (const std::bad_alloc &e)
+     {
+         return StatusType::ALLOCATION_ERROR;
+     }
 }
 
 StatusType Boom::GetIthWatchedClass(int i, int* courseID, int* classID){
-    
-    if(i>lectures.getNumNodes()){
-        return StatusType::FAILURE;
+    try
+    {
+        if (i > lectures.getNumNodes())
+        {
+            return StatusType::FAILURE;
+        }
+        // get the ith largest node
+        Lecture selected = lectures.select(lectures.getNumNodes() - i + 1)->getValue();
+        *courseID = selected.getCourseID();
+        *classID = selected.getLectureID();
+        return StatusType::SUCCESS;
     }
-    // get the ith largest node
-    Lecture selected = lectures.select(lectures.getNumNodes()-i+1)->getValue();
-    *courseID = selected.getCourseID();
-    *classID = selected.getLectureID();
-    return StatusType::SUCCESS;
+    catch (const std::bad_alloc &e)
+    {
+        return StatusType::ALLOCATION_ERROR;
+    }
 }
 
 // consider changing
