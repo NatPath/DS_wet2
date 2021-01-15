@@ -70,11 +70,6 @@ class ListNode{
         }
     }
     void orphanateNode(){
-        /*
-        if (prev!=nullptr){
-            prev->connectNext(next);
-        }
-        */
         setNext(nullptr);
         setPrev(nullptr);
     }

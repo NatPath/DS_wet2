@@ -32,10 +32,6 @@ class HashTable{
    void expand(){
        List<T>* temp_data;
        int old_size=_size;
-       /*
-       print("printing table BEFORE");
-       printTable();
-       */
        _size=_size*2;
        try{
            temp_data=new List<T>[_size];
@@ -62,10 +58,6 @@ class HashTable{
            }
            delete[] _data_chains;
            _data_chains=temp_data;
-           /*
-           print("printing table after");
-           printTable();
-           */
        }
        catch(...){
            _size=old_size;
@@ -130,17 +122,6 @@ class HashTable{
       int table_index=hash_function(to_find);
        return _data_chains[table_index].find(to_find);
    }
-/*
-   T* findValue(int id){
-       
-    //ListNode<T>* res = _data_chains[(hash_id(id)]->find);
-    if(res){
-        return res->getValue().get();
-    }
-    return nullptr;
-
-   }
-   */
 
    bool insert(T& to_insert){
        if (find(to_insert)!=nullptr){
